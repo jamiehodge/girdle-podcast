@@ -1,12 +1,12 @@
 require_relative 'spec_helper'
 
 def must_set_subcommand(value)
-  @Task.arguments.first.must_equal value
+  @task.arguments.first.must_equal value
 end
 
 def must_set_argument(argument, value)
-  @Task.arguments[
-    @Task.arguments.index("--#{argument}") + 1
+  @task.arguments[
+    @task.arguments.index("--#{argument}") + 1
     ].must_equal value
 end
 
@@ -20,7 +20,7 @@ describe 'Girdle::Podcast::Task' do
   describe '.add_chapter' do
     
     before do
-      @Task = Girdle::Podcast::Task.add_chapter(
+      @task = Girdle::Podcast::Task.add_chapter(
         input: 'input',
         time: 'time',
         title: 'title'
@@ -28,7 +28,7 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set name' do
-      @Task.name.must_match 'input-addchapter'
+      @task.name.must_match 'input-addchapter'
     end
     
     it 'must set subcommand argument' do
@@ -52,25 +52,25 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set output argument' do
-      must_set_argument 'output', @Task.name
+      must_set_argument 'output', @task.name
     end
     
     it 'must set depends_on' do
-      @Task.depends_on.must_equal ['input']
+      @task.depends_on.must_equal ['input']
     end
   end
   
   describe '.add_tracks' do
     
     before do
-      @Task = Girdle::Podcast::Task.add_tracks(
+      @task = Girdle::Podcast::Task.add_tracks(
         tracks: 'tracks',
         input: 'input'
       )
     end
     
     it 'must set name' do
-      @Task.name.must_match 'input-addtracks'
+      @task.name.must_match 'input-addtracks'
     end
     
     it 'must set subcommand argument' do
@@ -90,18 +90,18 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set output argument' do
-      must_set_argument 'output', @Task.name
+      must_set_argument 'output', @task.name
     end
     
     it 'must set depends_on' do
-      @Task.depends_on.must_equal ['input']
+      @task.depends_on.must_equal ['input']
     end
   end
   
   describe '.annotate' do
     
     before do
-      @Task = Girdle::Podcast::Task.annotate(
+      @task = Girdle::Podcast::Task.annotate(
         input:       'input',
         title:       'title',
         comment:     'comment',
@@ -113,7 +113,7 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set name' do
-      @Task.name.must_match 'input-annotate'
+      @task.name.must_match 'input-annotate'
     end
     
     it 'must set subcommand argument' do
@@ -149,20 +149,20 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set depends_on' do
-      @Task.depends_on.must_equal ['input']
+      @task.depends_on.must_equal ['input']
     end
   end
   
   describe '.chapterize' do
     
     before do
-      @Task = Girdle::Podcast::Task.chapterize(
+      @task = Girdle::Podcast::Task.chapterize(
         input: 'input'
       )
     end
     
     it 'must set name' do
-      @Task.name.must_match 'input-chapterize'
+      @task.name.must_match 'input-chapterize'
     end
     
     it 'must set subcommand argument' do
@@ -178,25 +178,25 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set output argument' do
-      must_set_argument 'output', @Task.name
+      must_set_argument 'output', @task.name
     end
     
     it 'must set depends_on' do
-      @Task.depends_on.must_equal ['input']
+      @task.depends_on.must_equal ['input']
     end
   end
   
   describe '.delete_tracks' do
     
     before do
-      @Task = Girdle::Podcast::Task.delete_tracks(
+      @task = Girdle::Podcast::Task.delete_tracks(
         input: 'input',
         type:  'type'
       )
     end
     
     it 'must set name' do
-      @Task.name.must_match 'input-deletetracks'
+      @task.name.must_match 'input-deletetracks'
     end
     
     it 'must set subcommand argument' do
@@ -212,7 +212,7 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set output argument' do
-      must_set_argument 'output', @Task.name
+      must_set_argument 'output', @task.name
     end
     
     it 'must set type argument' do
@@ -220,21 +220,21 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set depends_on' do
-      @Task.depends_on.must_equal ['input']
+      @task.depends_on.must_equal ['input']
     end
   end
   
   describe '.encode' do
     
     before do
-      @Task = Girdle::Podcast::Task.encode(
+      @task = Girdle::Podcast::Task.encode(
         input: 'input',
         encoder: 'encoder'
       )
     end
     
     it 'must set name' do
-      @Task.name.must_match 'input-encode'
+      @task.name.must_match 'input-encode'
     end
     
     it 'must set subcommand argument' do
@@ -254,25 +254,25 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set output argument' do
-      must_set_argument 'output', @Task.name
+      must_set_argument 'output', @task.name
     end
     
     it 'must set depends_on' do
-      @Task.depends_on.must_equal ['input']
+      @task.depends_on.must_equal ['input']
     end
   end
   
   describe '.extract_tracks' do
     
     before do
-      @Task = Girdle::Podcast::Task.extract_tracks(
+      @task = Girdle::Podcast::Task.extract_tracks(
         input: 'input',
         type: 'type'
       )
     end
     
     it 'must set name' do
-      @Task.name.must_match 'input-extracttracks'
+      @task.name.must_match 'input-extracttracks'
     end
     
     it 'must set subcommand argument' do
@@ -288,7 +288,7 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set output argument' do
-      must_set_argument 'output', @Task.name
+      must_set_argument 'output', @task.name
     end
     
     it 'must set type argument' do
@@ -296,21 +296,21 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set depends_on' do
-      @Task.depends_on.must_equal ['input']
+      @task.depends_on.must_equal ['input']
     end
   end
   
   describe '.get_poster_image' do
     
     before do
-      @Task = Girdle::Podcast::Task.get_poster_image(
+      @task = Girdle::Podcast::Task.get_poster_image(
         input: 'input',
         time:  'time'
       )
     end
     
     it 'must set name' do
-      @Task.name.must_match 'input-getposterimage'
+      @task.name.must_match 'input-getposterimage'
     end
     
     it 'must set subcommand' do
@@ -326,7 +326,7 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set output argument' do
-      must_set_argument 'output', @Task.name
+      must_set_argument 'output', @task.name
     end
     
   end
@@ -336,14 +336,14 @@ describe 'Girdle::Podcast::Task' do
   describe '.join' do
     
     before do
-      @Task = Girdle::Podcast::Task.join(
+      @task = Girdle::Podcast::Task.join(
         input_1: 'input 1', 
         input_2: 'input 2'
         )
     end
     
     it 'must set name' do
-      @Task.name.must_match 'input 1-input 2-join'
+      @task.name.must_match 'input 1-input 2-join'
     end
     
     it 'must set subcommand argument' do
@@ -363,11 +363,11 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set output argument' do
-      must_set_argument 'output', @Task.name
+      must_set_argument 'output', @task.name
     end
     
     it 'must set depends_on' do
-      @Task.depends_on.must_equal ['input 1', 'input 2']
+      @task.depends_on.must_equal ['input 1', 'input 2']
     end
   end
   
@@ -380,7 +380,7 @@ describe 'Girdle::Podcast::Task' do
   describe '.qtimport' do
     
     before do
-      @Task = Girdle::Podcast::Task.qtimport(
+      @task = Girdle::Podcast::Task.qtimport(
         input: 'input',
         output: 'output',
         enable_auto_chaptering: true
@@ -388,7 +388,7 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set name' do
-      @Task.name.must_match 'input-qtimport'
+      @task.name.must_match 'input-qtimport'
     end
     
     it 'must set subcommand argument' do
@@ -404,11 +404,11 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set output argument' do
-      must_set_argument 'output', @Task.name
+      must_set_argument 'output', @task.name
     end
     
     it 'must set auto chaptering argument' do
-      @Task.arguments.must_include('--enable_auto_chaptering')
+      @task.arguments.must_include('--enable_auto_chaptering')
     end
     
     it 'must not set auto chaptering argument' do
@@ -420,21 +420,21 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set depends_on' do
-      @Task.depends_on.must_equal ['preflight']
+      @task.depends_on.must_equal ['preflight']
     end
   end
   
   describe '.qtinfo' do
     
     before do
-      @Task = Girdle::Podcast::Task.qtinfo(
+      @task = Girdle::Podcast::Task.qtinfo(
         input: 'input',
         key:   'key'
       )
     end
     
     it 'must set name' do
-      @Task.name.must_match 'input-qtinfo'
+      @task.name.must_match 'input-qtinfo'
     end
     
     it 'must set subcommand' do
@@ -460,7 +460,7 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set depends_on' do
-      @Task.depends_on.must_equal [ 'input' ]
+      @task.depends_on.must_equal [ 'input' ]
     end
   end
   
