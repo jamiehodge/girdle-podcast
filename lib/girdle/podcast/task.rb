@@ -202,7 +202,7 @@ module Girdle
       end
       
       def self.qc_composition(options={})
-        name = "qc_composition_#{options[:composition]}_#{uuid}.mov"
+        name = "qc_composition_#{uuid}.mov"
         arguments = [
           options[:composition],
           name,
@@ -214,6 +214,7 @@ module Girdle
           name: name,
           arguments: arguments
         ).tap { |t| t.instance_eval { @command = '/usr/bin/qc2movie' }}
+        
       end
 
       private

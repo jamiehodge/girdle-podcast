@@ -483,7 +483,7 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set name' do
-      @task.name.must_match 'qc_composition_composition'
+      @task.name.must_match 'qc_composition'
     end
     
     it 'must set command' do
