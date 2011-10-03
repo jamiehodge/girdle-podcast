@@ -203,9 +203,10 @@ module Girdle
       
       def self.qc_composition(options={})
         name = "qc_composition_#{uuid}.mov"
+        base_dir = options[:base_dir] || '.'
         arguments = [
           options[:composition],
-          name,
+          File.join(base_dir, name),
           options[:width],
           options[:height],
           options[:duration]
