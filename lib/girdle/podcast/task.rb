@@ -209,7 +209,7 @@ module Girdle
           options[:width],
           options[:height],
           options[:duration]
-          ] + options[:parameters].map {|k,v| ["--#{k}", v] }.flatten
+          ] + (options[:parameters] || {}).map {|k,v| ["--#{k}", v] }.flatten
         self.new(
           name: name,
           arguments: arguments
