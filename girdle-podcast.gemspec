@@ -15,5 +15,5 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib/girdle']
   gem.version       = Girdle::Podcast::VERSION
   
-  gem.add_dependency('girdle')
+  gem.add_dependency 'girdle'
 end

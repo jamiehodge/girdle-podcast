@@ -103,8 +103,8 @@ module Girdle
           'encode',
           '--basedir', options[:base_dir] || '.',
           '--input', options[:input],
-          '--encoder', options[:encoder],
-          '--output', name
+          '--output', name,
+          '--encoder', options[:encoder]
           ]
         self.new(
           name: name,
@@ -138,8 +138,8 @@ module Girdle
         arguments = [
           'getposterimage',
           '--input',  options[:input],
-          '--time',   options[:time],
-          '--output', name
+          '--output', name,
+          '--time',   options[:time]
           ]
         self.new(
           name: name,
@@ -169,7 +169,7 @@ module Girdle
         )
       end
 
-      def self.qtimport(options={})
+      def self.qt_import(options={})
         name = "#{File.basename(options[:input])}-qtimport-#{uuid}.mov"
         arguments = [
           'qtimport',
@@ -187,7 +187,7 @@ module Girdle
         )
       end
 
-      def self.qtinfo(options={})
+      def self.qt_info(options={})
         arguments = [
           'qtinfo',
           '--basedir', options[:base_dir] || '.',
@@ -199,6 +199,21 @@ module Girdle
           arguments: arguments,
           depends_on: [ options[:input] ]
         )
+      end
+      
+      def self.qc_composition(options={})
+        name = "qc_composition_#{options[:composition]}_#{uuid}.mov"
+        arguments = [
+          options[:composition],
+          name,
+          options[:width],
+          options[:height],
+          options[:duration]
+          ] + options[:parameters].map {|k,v| ["--#{k}", v] }.flatten
+        self.new(
+          name: name,
+          arguments: arguments
+        ).tap { |t| t.instance_eval { @command = '/usr/bin/qc2movie' }}
       end
 
       private
