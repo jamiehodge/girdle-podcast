@@ -17,7 +17,7 @@ describe 'Girdle::Podcast::Task' do
       Task.command.must_equal '/usr/bin/pcastaction'
   end
   
-  describe '.add_chapter' do
+  describe '::add_chapter' do
     
     before do
       @task = Girdle::Podcast::Task.add_chapter(
@@ -60,7 +60,7 @@ describe 'Girdle::Podcast::Task' do
     end
   end
   
-  describe '.add_tracks' do
+  describe '::add_tracks' do
     
     before do
       @task = Girdle::Podcast::Task.add_tracks(
@@ -98,7 +98,7 @@ describe 'Girdle::Podcast::Task' do
     end
   end
   
-  describe '.annotate' do
+  describe '::annotate' do
     
     before do
       @task = Girdle::Podcast::Task.annotate(
@@ -153,7 +153,7 @@ describe 'Girdle::Podcast::Task' do
     end
   end
   
-  describe '.chapterize' do
+  describe '::chapterize' do
     
     before do
       @task = Girdle::Podcast::Task.chapterize(
@@ -186,7 +186,7 @@ describe 'Girdle::Podcast::Task' do
     end
   end
   
-  describe '.delete_tracks' do
+  describe '::delete_tracks' do
     
     before do
       @task = Girdle::Podcast::Task.delete_tracks(
@@ -224,7 +224,7 @@ describe 'Girdle::Podcast::Task' do
     end
   end
   
-  describe '.encode' do
+  describe '::encode' do
     
     before do
       @task = Girdle::Podcast::Task.encode(
@@ -262,7 +262,7 @@ describe 'Girdle::Podcast::Task' do
     end
   end
   
-  describe '.extract_tracks' do
+  describe '::extract_tracks' do
     
     before do
       @task = Girdle::Podcast::Task.extract_tracks(
@@ -300,7 +300,7 @@ describe 'Girdle::Podcast::Task' do
     end
   end
   
-  describe '.get_poster_image' do
+  describe '::get_poster_image' do
     
     before do
       @task = Girdle::Podcast::Task.get_poster_image(
@@ -331,9 +331,9 @@ describe 'Girdle::Podcast::Task' do
     
   end
   
-  describe '.get_preview_movie' do; end
+  describe '::get_preview_movie' do; end
   
-  describe '.join' do
+  describe '::join' do
     
     before do
       @task = Girdle::Podcast::Task.join(
@@ -371,13 +371,13 @@ describe 'Girdle::Podcast::Task' do
     end
   end
   
-  describe '.merge' do; end
+  describe '::merge' do; end
   
-  describe '.picture_in_picture' do; end
+  describe '::picture_in_picture' do; end
   
-  describe '.qceffect' do; end
+  describe '::qceffect' do; end
   
-  describe '.qtimport' do
+  describe '::qtimport' do
     
     before do
       @task = Girdle::Podcast::Task.qt_import(
@@ -424,7 +424,7 @@ describe 'Girdle::Podcast::Task' do
     end
   end
   
-  describe '.qtinfo' do
+  describe '::qtinfo' do
     
     before do
       @task = Girdle::Podcast::Task.qt_info(
@@ -464,13 +464,13 @@ describe 'Girdle::Podcast::Task' do
     end
   end
   
-  describe '.split' do; end
+  describe '::split' do; end
   
-  describe '.trim' do; end
+  describe '::trim' do; end
   
-  describe '.watermark' do; end
+  describe '::watermark' do; end
   
-  describe '.qc_composition' do
+  describe '::qc_composition' do
     
     before do
       @task = Girdle::Podcast::Task.qc_composition(
@@ -495,7 +495,7 @@ describe 'Girdle::Podcast::Task' do
     end
     
     it 'must set output argument' do
-      @task.arguments[1].must_equal @task.name
+      @task.arguments[1].must_equal "./#{@task.name}"
     end
     
     it 'must set width argument' do
