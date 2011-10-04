@@ -8,7 +8,7 @@ module Girdle
       end
 
       def self.add_chapter(options={})
-        name = "#{File.basename(options[:input])}-addchapter-#{uuid}.mov"
+        name = "#{options[:input]}-addchapter-#{uuid}.mov"
         arguments = [
           'addchapter',
           '--basedir', options[:base_dir] || '.',
@@ -27,7 +27,7 @@ module Girdle
       end
 
       def self.add_tracks(options={})
-        name = "#{File.basename(options[:input])}-addtracks-#{uuid}.mov"
+        name = "#{options[:input]}-addtracks-#{uuid}.mov"
         arguments = [
           'addtracks',
           '--basedir', options[:base_dir] || '.',
@@ -58,14 +58,14 @@ module Girdle
         arguments += ['--keywords', options[:keywords]] if options[:keywords]
         arguments += ['--copyright', options[:copyright]] if options[:copyright]
         self.new(
-          name: "#{File.basename(options[:input])}-annotate-#{uuid}.mov",
+          name: "#{options[:input]}-annotate-#{uuid}.mov",
           arguments: arguments,
           depends_on: [ options[:input] ]
         )
       end
 
       def self.chapterize(options={})
-        name = "#{File.basename(options[:input])}-chapterize-#{uuid}.mov"
+        name = "#{options[:input]}-chapterize-#{uuid}.mov"
         arguments = [
           'chapterize',
           '--basedir', options[:base_dir] || '.',
@@ -82,7 +82,7 @@ module Girdle
       end
 
       def self.delete_tracks(options={})
-        name = "#{File.basename(options[:input])}-deletetracks-#{uuid}.mov"
+        name = "#{options[:input]}-deletetracks-#{uuid}.mov"
         arguments = [
           'deletetracks',
           '--basedir', options[:base_dir] || '.',
@@ -93,12 +93,14 @@ module Girdle
         self.new(
           name: name,
           arguments: arguments,
-          depends_on: [ options[:input] ]
+          depends_on: [ 
+            options[:input]
+            ]
         )
       end
 
       def self.encode(options={})
-        name = "#{File.basename(options[:input])}-encode-#{uuid}.mov"
+        name = "#{options[:input]}-encode-#{uuid}.mov"
         arguments = [
           'encode',
           '--basedir', options[:base_dir] || '.',
@@ -116,7 +118,7 @@ module Girdle
       end
 
       def self.extract_tracks(options={})
-        name = "#{File.basename(options[:input])}-extracttracks-#{uuid}.mov"
+        name = "#{options[:input]}-extracttracks-#{uuid}.mov"
         arguments = [
           'extracttracks',
           '--basedir', options[:base_dir] || '.',
@@ -128,13 +130,13 @@ module Girdle
           name: name,
           arguments: arguments,
           depends_on: [
-            File.basename(options[:input])
+            options[:input]
             ]
         )
       end
 
       def self.get_poster_image(options={})
-        name = "#{File.basename(options[:input])}-getposterimage-#{uuid}.png"
+        name = "#{options[:input]}-getposterimage-#{uuid}.png"
         arguments = [
           'getposterimage',
           '--input',  options[:input],
@@ -151,7 +153,7 @@ module Girdle
       end
 
       def self.join(options={})
-        name = "#{File.basename(options[:input_1])}-#{File.basename(options[:input_2])}-join-#{uuid}.mov"
+        name = "#{options[:input_1]}-#{options[:input_2]}-join-#{uuid}.mov"
         arguments = [
           'join', 
           '--basedir', options[:base_dir] || '.',
@@ -170,7 +172,7 @@ module Girdle
       end
 
       def self.qt_import(options={})
-        name = "#{File.basename(options[:input])}-qtimport-#{uuid}.mov"
+        name = "#{options[:input]}-qtimport-#{uuid}.mov"
         arguments = [
           'qtimport',
           '--basedir', options[:base_dir] || '.',
@@ -195,7 +197,7 @@ module Girdle
           ]
         arguments += ['--key', options[:key] ] if options[:key]
         self.new(
-          name: "#{File.basename(options[:input])}-qtinfo-#{uuid}",
+          name: "#{options[:input]}-qtinfo-#{uuid}",
           arguments: arguments,
           depends_on: [ options[:input] ]
         )
