@@ -1,54 +1,50 @@
 module Girdle
   module Podcast
-    class Task < Girdle::Task
+    module Action
 
-      def initialize(options={})
-        super(options)
-        @command = '/usr/bin/pcastaction'
-      end
-
-      def self.add_chapter(options={})
-        name = "#{options[:input]}-addchapter-#{uuid}.mov"
+      def add_chapter(options={})
+        name = "add_chapter-#{uuid}.mov"
+        input = options[:input]
         arguments = [
           'addchapter',
           '--basedir', options[:base_dir] || '.',
-          '--input',   options[:input],
+          '--input',   input,
           '--output',  name,
           '--time',    options[:time],
           '--title',   options[:title]
           ]
-        self.new(
+        new(
           name: name,
+          command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [
-            options[:input]
-            ]
+          depends_on: [ options[:input] ]
         )
       end
 
-      def self.add_tracks(options={})
-        name = "#{options[:input]}-addtracks-#{uuid}.mov"
+      def add_tracks(options={})
+        name = "add_tracks-#{uuid}.mov"
+        input = options[:input]
         arguments = [
           'addtracks',
           '--basedir', options[:base_dir] || '.',
           '--tracks', options[:tracks],
-          '--input', options[:input],
+          '--input', input,
           '--output', name
           ]
-        self.new(
+        new(
           name: name,
+          command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [
-            File.basename(options[:input].to_s)
-            ]
+          depends_on: [ options[:input] ]
         )
       end
 
-      def self.annotate(options={})
+      def annotate(options={})
+        input = options[:input]
         arguments = [
           'annotate',
           '--basedir',    options[:base_dir] || '.',
-          '--input',      options[:input]
+          '--input',      input
           ]
         arguments += ['--title', options[:title]] if options[:title]
         arguments += ['--comment', options[:comment]] if options[:comment]
@@ -57,103 +53,103 @@ module Girdle
         arguments += ['--author', options[:author]] if options[:author]
         arguments += ['--keywords', options[:keywords]] if options[:keywords]
         arguments += ['--copyright', options[:copyright]] if options[:copyright]
-        self.new(
-          name: "#{options[:input]}-annotate-#{uuid}.mov",
+        new(
+          name: "annotate-#{uuid}.mov",
+          command: '/usr/bin/pcastaction',
           arguments: arguments,
           depends_on: [ options[:input] ]
         )
       end
 
-      def self.chapterize(options={})
-        name = "#{options[:input]}-chapterize-#{uuid}.mov"
+      def chapterize(options={})
+        name = "chapterize-#{uuid}.mov"
+        input = options[:input]
         arguments = [
           'chapterize',
           '--basedir', options[:base_dir] || '.',
-          '--input', options[:input],
+          '--input', input,
           '--output', name
           ]
-        self.new(
+        new(
           name: name,
+          command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [
-            options[:input]
-            ]
+          depends_on: [ options[:input] ]
         )
       end
 
-      def self.delete_tracks(options={})
-        name = "#{options[:input]}-deletetracks-#{uuid}.mov"
+      def delete_tracks(options={})
+        name = "delete_tracks-#{uuid}.mov"
+        input = options[:input]
         arguments = [
           'deletetracks',
           '--basedir', options[:base_dir] || '.',
-          '--input', options[:input],
+          '--input', input,
           '--output', name,
           '--type', options[:type]
           ]
-        self.new(
+        new(
           name: name,
+          command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [ 
-            options[:input]
-            ]
+          depends_on: [ options[:input] ]
         )
       end
 
-      def self.encode(options={})
-        name = "#{options[:input]}-encode-#{uuid}.mov"
+      def encode(options={})
+        name = "encode-#{uuid}.mov"
+        input = options[:input]
         arguments = [
           'encode',
           '--basedir', options[:base_dir] || '.',
-          '--input', options[:input],
+          '--input', input,
           '--output', name,
           '--encoder', options[:encoder]
           ]
-        self.new(
+        new(
           name: name,
+          command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [
-            options[:input]
-            ]
+          depends_on: [ options[:input] ]
         ) 
       end
 
-      def self.extract_tracks(options={})
-        name = "#{options[:input]}-extracttracks-#{uuid}.mov"
+      def extract_tracks(options={})
+        name = "extract_tracks-#{uuid}.mov"
+        input = options[:input]
         arguments = [
           'extracttracks',
           '--basedir', options[:base_dir] || '.',
-          '--input', options[:input],
+          '--input', input,
           '--output', name,
           '--type', options[:type]
           ]
-        self.new(
+        new(
           name: name,
+          command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [
-            options[:input]
-            ]
+          depends_on: [ options[:input] ]
         )
       end
 
-      def self.get_poster_image(options={})
-        name = "#{options[:input]}-getposterimage-#{uuid}.png"
+      def get_poster_image(options={})
+        name = "get_poster_image-#{uuid}.png"
         arguments = [
           'getposterimage',
           '--input',  options[:input],
           '--output', name,
           '--time',   options[:time]
           ]
-        self.new(
+        new(
           name: name,
+          command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [
-            options[:input]
-            ]
+          depends_on: [ options[:input] ]
         )
       end
 
-      def self.join(options={})
-        name = "#{options[:input_1]}-#{options[:input_2]}-join-#{uuid}.mov"
+      def join(options={})
+        name = "join-#{uuid}.mov"
         arguments = [
           'join', 
           '--basedir', options[:base_dir] || '.',
@@ -161,18 +157,16 @@ module Girdle
           '--input2',  options[:input_2],
           '--output',  name
           ]
-        self.new(
-          name: name, 
+        new(
+          name: name,
+          command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [
-            options[:input_1],
-            options[:input_2]
-            ]
+          depends_on: [ options[:input_1], options[:input_2] ]
         )
       end
 
-      def self.qt_import(options={})
-        name = "#{options[:input]}-qtimport-#{uuid}.mov"
+      def qt_import(options={})
+        name = "qt_import-#{uuid}.mov"
         arguments = [
           'qtimport',
           '--basedir', options[:base_dir] || '.',
@@ -182,49 +176,34 @@ module Girdle
         if options[:enable_auto_chaptering] == true
           arguments << '--enable_auto_chaptering'
         end
-        self.new(
+        new(
           name: name,
-          arguments: arguments,
-          depends_on: ['preflight']
-        )
-      end
-
-      def self.qt_info(options={})
-        arguments = [
-          'qtinfo',
-          '--basedir', options[:base_dir] || '.',
-          '--input',   options[:input]
-          ]
-        arguments += ['--key', options[:key] ] if options[:key]
-        self.new(
-          name: "#{options[:input]}-qtinfo-#{uuid}",
+          command: '/usr/bin/pcastaction',
           arguments: arguments,
           depends_on: [ options[:input] ]
         )
       end
-      
-      def self.qc_composition(options={})
-        name = "qc_composition_#{uuid}.mov"
-        base_dir = options[:base_dir] || '.'
+
+      def qt_info(options={})
         arguments = [
-          options[:composition],
-          File.join(base_dir, name),
-          options[:width],
-          options[:height],
-          options[:duration]
-          ] + (options[:parameters] || {}).map {|k,v| ["--#{k}", v] }.flatten
-        self.new(
-          name: name,
-          arguments: arguments
-        ).tap { |t| t.instance_eval { @command = '/usr/bin/qc2movie' }}
-        
+          'qtinfo',
+          '--basedir', options[:base_dir] || '.',
+          '--input',   options[:input],
+          ]
+        arguments += ['--key', options[:key] ] if options[:key]
+        new(
+          name: "qt_info-#{uuid}",
+          command: '/usr/bin/pcastaction',
+          arguments: arguments,
+          depends_on: [ options[:input] ]
+        )
       end
 
       private
 
-        def self.uuid
+        def uuid
           `uuidgen`.strip
-        end
+        end  
     end
   end
 end
