@@ -16,4 +16,9 @@ Gem::Specification.new do |gem|
   gem.version       = Girdle::Podcast::VERSION
   
   gem.add_dependency 'girdle'
+
+  gem.add_development_dependency 'guard'
+  gem.add_development_dependency 'guard-minitest'
+  gem.add_development_dependency 'rb-fsevent'
+  gem.add_development_dependency 'growl_notify'
 end
