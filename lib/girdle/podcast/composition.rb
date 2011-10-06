@@ -16,7 +16,7 @@ module Girdle
           name: name,
           command: '/usr/bin/qc2movie',
           arguments: arguments,
-          depends_on: []
+          depends_on: options[:depends_on] || []
         )
       end
     end
