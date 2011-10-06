@@ -39,7 +39,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set input argument' do
-      must_set_argument 'input', @input
+      must_set_argument 'input', 'input'
     end
     
     it 'must set time argument' do
@@ -55,7 +55,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set depends_on' do
-      @task.depends_on.must_equal [ @input ]
+      @task.depends_on.must_equal [ 'input' ]
     end
   end
   
@@ -85,7 +85,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set input argument' do
-      must_set_argument 'input', @input
+      must_set_argument 'input', 'input'
     end
     
     it 'must set output argument' do
@@ -93,7 +93,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set depends_on' do
-      @task.depends_on.must_equal [ @input ]
+      @task.depends_on.must_equal [ 'input' ]
     end
   end
   
@@ -124,7 +124,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set input argument' do
-      must_set_argument 'input', @input
+      must_set_argument 'input', 'input'
     end
     
     it 'must set title argument' do
@@ -148,7 +148,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set depends_on' do
-      @task.depends_on.must_equal [ @input ]
+      @task.depends_on.must_equal [ 'input' ]
     end
   end
   
@@ -173,7 +173,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set input argument' do
-      must_set_argument 'input', @input
+      must_set_argument 'input', 'input'
     end
     
     it 'must set output argument' do
@@ -181,7 +181,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set depends_on' do
-      @task.depends_on.must_equal [ @input ]
+      @task.depends_on.must_equal [ 'input' ]
     end
   end
   
@@ -207,7 +207,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set input argument' do
-      must_set_argument 'input', @input
+      must_set_argument 'input', 'input'
     end
     
     it 'must set output argument' do
@@ -219,7 +219,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set depends_on' do
-      @task.depends_on.must_equal [ @input ]
+      @task.depends_on.must_equal [ 'input' ]
     end
   end
   
@@ -245,7 +245,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set input argument' do
-      must_set_argument 'input', @input
+      must_set_argument 'input', 'input'
     end
     
     it 'must set encoder argument' do
@@ -257,7 +257,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set depends_on' do
-      @task.depends_on.must_equal [ @input ]
+      @task.depends_on.must_equal [ 'input' ]
     end
   end
   
@@ -283,7 +283,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set input argument' do
-      must_set_argument 'input', @input
+      must_set_argument 'input', 'input'
     end
     
     it 'must set output argument' do
@@ -295,7 +295,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set depends_on' do
-      @task.depends_on.must_equal [ @input ]
+      @task.depends_on.must_equal [ 'input' ]
     end
   end
   
@@ -317,7 +317,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set input argument' do
-      must_set_argument 'input', @input
+      must_set_argument 'input', 'input'
     end
     
     it 'must set time argument' do
@@ -358,7 +358,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set input_2 argument' do
-      must_set_argument 'input2', @input
+      must_set_argument 'input2', 'input'
     end
     
     it 'must set output argument' do
@@ -366,7 +366,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set depends_on' do
-      @task.depends_on.must_equal [ @input ]
+      @task.depends_on.must_equal [ 'input' ]
     end
   end
   
@@ -399,7 +399,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set input argument' do
-      must_set_argument 'input', @input
+      must_set_argument 'input', 'input'
     end
     
     it 'must set output argument' do
@@ -419,7 +419,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set depends_on' do
-      @task.depends_on.must_equal [ @input ]
+      @task.depends_on.must_equal [ 'input' ]
     end
   end
   
@@ -445,7 +445,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set input argument' do
-      must_set_argument 'input', @input
+      must_set_argument 'input', 'input'
     end
     
     it 'must set key argument' do
@@ -459,7 +459,7 @@ describe Girdle::Podcast::Action do
     end
     
     it 'must set depends_on' do
-      @task.depends_on.must_equal [ @input ]
+      @task.depends_on.must_equal [ 'input' ]
     end
   end
   

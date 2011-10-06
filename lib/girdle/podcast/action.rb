@@ -4,11 +4,10 @@ module Girdle
 
       def add_chapter(options={})
         name = "add_chapter-#{uuid}.mov"
-        input = options[:input]
         arguments = [
           'addchapter',
           '--basedir', options[:base_dir] || '.',
-          '--input',   input,
+          '--input',   options[:input],
           '--output',  name,
           '--time',    options[:time],
           '--title',   options[:title]
@@ -17,34 +16,32 @@ module Girdle
           name: name,
           command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [ options[:input] ]
+          depends_on: select_tasks([ options[:input] ] + (options[:depends_on] || []))
         )
       end
 
       def add_tracks(options={})
         name = "add_tracks-#{uuid}.mov"
-        input = options[:input]
         arguments = [
           'addtracks',
           '--basedir', options[:base_dir] || '.',
           '--tracks', options[:tracks],
-          '--input', input,
+          '--input', options[:input],
           '--output', name
           ]
         new(
           name: name,
           command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [ options[:input] ]
+          depends_on: select_tasks([ options[:input] ] + (options[:depends_on] || []))
         )
       end
 
       def annotate(options={})
-        input = options[:input]
         arguments = [
           'annotate',
           '--basedir',    options[:base_dir] || '.',
-          '--input',      input
+          '--input',      options[:input]
           ]
         arguments += ['--title', options[:title]] if options[:title]
         arguments += ['--comment', options[:comment]] if options[:comment]
@@ -57,34 +54,32 @@ module Girdle
           name: "annotate-#{uuid}.mov",
           command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [ options[:input] ]
+          depends_on: select_tasks([ options[:input] ] + (options[:depends_on] || []))
         )
       end
 
       def chapterize(options={})
         name = "chapterize-#{uuid}.mov"
-        input = options[:input]
         arguments = [
           'chapterize',
           '--basedir', options[:base_dir] || '.',
-          '--input', input,
+          '--input', options[:input],
           '--output', name
           ]
         new(
           name: name,
           command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [ options[:input] ]
+          depends_on: select_tasks([ options[:input] ] + (options[:depends_on] || []))
         )
       end
 
       def delete_tracks(options={})
         name = "delete_tracks-#{uuid}.mov"
-        input = options[:input]
         arguments = [
           'deletetracks',
           '--basedir', options[:base_dir] || '.',
-          '--input', input,
+          '--input', options[:input],
           '--output', name,
           '--type', options[:type]
           ]
@@ -92,17 +87,16 @@ module Girdle
           name: name,
           command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [ options[:input] ]
+          depends_on: select_tasks([ options[:input] ] + (options[:depends_on] || []))
         )
       end
 
       def encode(options={})
         name = "encode-#{uuid}.mov"
-        input = options[:input]
         arguments = [
           'encode',
           '--basedir', options[:base_dir] || '.',
-          '--input', input,
+          '--input', options[:input],
           '--output', name,
           '--encoder', options[:encoder]
           ]
@@ -110,17 +104,16 @@ module Girdle
           name: name,
           command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [ options[:input] ]
+          depends_on: select_tasks([ options[:input] ] + (options[:depends_on] || []))
         ) 
       end
 
       def extract_tracks(options={})
         name = "extract_tracks-#{uuid}.mov"
-        input = options[:input]
         arguments = [
           'extracttracks',
           '--basedir', options[:base_dir] || '.',
-          '--input', input,
+          '--input', options[:input],
           '--output', name,
           '--type', options[:type]
           ]
@@ -128,7 +121,7 @@ module Girdle
           name: name,
           command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [ options[:input] ]
+          depends_on: select_tasks([ options[:input] ] + (options[:depends_on] || []))
         )
       end
 
@@ -136,6 +129,7 @@ module Girdle
         name = "get_poster_image-#{uuid}.png"
         arguments = [
           'getposterimage',
+          '--basedir', options[:base_dir] || '.',
           '--input',  options[:input],
           '--output', name,
           '--time',   options[:time]
@@ -144,7 +138,7 @@ module Girdle
           name: name,
           command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [ options[:input] ]
+          depends_on: select_tasks([ options[:input] ] + (options[:depends_on] || []))
         )
       end
 
@@ -161,7 +155,7 @@ module Girdle
           name: name,
           command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [ options[:input_1], options[:input_2] ]
+          depends_on: select_tasks([ options[:input_1], options[:input_2] ] + (options[:depends_on] || []))
         )
       end
 
@@ -180,7 +174,7 @@ module Girdle
           name: name,
           command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [ options[:input] ]
+          depends_on: select_tasks([ options[:input] ] + (options[:depends_on] || []))
         )
       end
 
@@ -195,7 +189,7 @@ module Girdle
           name: "qt_info-#{uuid}",
           command: '/usr/bin/pcastaction',
           arguments: arguments,
-          depends_on: [ options[:input] ]
+          depends_on: select_tasks([ options[:input] ] + (options[:depends_on] || []))
         )
       end
 
@@ -203,7 +197,11 @@ module Girdle
 
         def uuid
           `uuidgen`.strip
-        end  
+        end
+        
+        def select_tasks(dependencies)
+          dependencies.select {|d| d.respond_to?(:name) }
+        end
     end
   end
 end
