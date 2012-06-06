@@ -132,7 +132,7 @@ module Girdle
           '--basedir', options[:base_dir] || '.',
           '--input',  options[:input],
           '--output', name,
-          '--time',   options[:time]
+          "--time=#{options[:time]}"
           ]
         new(
           name: name,
