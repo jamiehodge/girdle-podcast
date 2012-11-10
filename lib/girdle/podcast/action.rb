@@ -124,6 +124,22 @@ module Girdle
           depends_on: select_tasks([ options[:input] ] + (options[:depends_on] || []))
         )
       end
+      
+      def flatten(options={})
+        name = "flatten-#{uuid}.mov"
+        arguments = [
+          'flatten',
+          '--basedir', options[:base_dir] || '.',
+          '--input', options[:input],
+          '--output', name,
+          ]
+        new(
+          name: name,
+          command: '/usr/bin/pcastaction',
+          arguments: arguments,
+          depends_on: select_tasks([ options[:input] ] + (options[:depends_on] || []))
+        ) 
+      end
 
       def get_poster_image(options={})
         name = "get_poster_image-#{uuid}.png"

@@ -299,6 +299,39 @@ describe Girdle::Podcast::Action do
     end
   end
   
+  describe '::flatten' do
+    
+    before do
+      @task = Girdle::Task.flatten(
+        input: @input
+      )
+    end
+    
+    it 'must set name' do
+      @task.name.must_match 'flatten'
+    end
+    
+    it 'must set subcommand argument' do
+      must_set_subcommand 'flatten'
+    end
+    
+    it 'must set base_dir argument' do
+      must_set_argument 'basedir', '.'
+    end
+    
+    it 'must set input argument' do
+      must_set_argument 'input', 'input'
+    end
+    
+    it 'must set output argument' do
+      must_set_argument 'output', @task.name
+    end
+    
+    it 'must set depends_on' do
+      @task.depends_on.must_equal [ 'input' ]
+    end
+  end
+  
   describe '::get_poster_image' do
     
     before do
