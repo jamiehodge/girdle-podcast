@@ -29,6 +29,7 @@ module Girdle
           '--input', options[:input],
           '--output', name
           ]
+        arguments += ['--offset', options[:offset]] if options[:offset]
         new(
           name: name,
           command: '/usr/bin/pcastaction',
